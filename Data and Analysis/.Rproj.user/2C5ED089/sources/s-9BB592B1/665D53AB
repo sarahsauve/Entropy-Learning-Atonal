@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1561142710759.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1241648861",
+    "id" : "665D53AB",
+    "lastKnownWriteTime" : 1562090981,
+    "last_content_update" : 1562090981938,
+    "path" : "D:/Sauve/Entropy-Learning-Atonal/Data and Analysis/ImportAndTidyingHumanData.R",
+    "project_path" : "ImportAndTidyingHumanData.R",
+    "properties" : {
+        "cursorPosition" : "219,39",
+        "scrollLine" : "198",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560956869265.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2567355842",
+    "id" : "7E69B74A",
+    "lastKnownWriteTime" : 1561049216,
+    "last_content_update" : 1561049216499,
+    "path" : "D:/Sauve/Entropy-Learning-Atonal/Data and Analysis/PowerCalculation.R",
+    "project_path" : "PowerCalculation.R",
+    "properties" : {
+        "cursorPosition" : "23,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
