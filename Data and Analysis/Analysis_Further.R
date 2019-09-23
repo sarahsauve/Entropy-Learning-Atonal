@@ -33,10 +33,10 @@ human.data.closure <- filter(human.data, RatingType == "Closure")
 cor.test(human.data.prediction$Rating, human.data.closure$Rating)
 
 #Variance explained by closure ratings
-prediction.model <- lmer(Rating ~ Time + (1+MelodyID|Participant), data = human.data.prediction)
+prediction.model <- lmer(Rating ~ Time + (1|MelodyID) + (1+MelodyID|Participant), data = human.data.prediction)
 
 humna.data.prediction$Closure <- human.data.closure$Rating
-prediction.closure <- lmer(Rating ~ Time + Closure + (1+MelodyID|Participant), data = human.data.prediction)
+prediction.closure <- lmer(Rating ~ Time + Closure + (1|MelodyID) + (1+MelodyID|Participant), data = human.data.prediction)
 
 anova(prediction.model, prediction.closure)
 r2.difference <- variance.explained(prediction.model) - variance.explained(prediction.closure)

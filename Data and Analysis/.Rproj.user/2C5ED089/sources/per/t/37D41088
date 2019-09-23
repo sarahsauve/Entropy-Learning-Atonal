@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1569259322647.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "37D41088",
+    "lastKnownWriteTime" : 1569259351,
+    "last_content_update" : 1569260724459,
+    "path" : "D:/Sync/Sauve/MUN Postdoc/Entropy-Learning-Atonal/Data and Analysis/MixedEffects_PowerCalculation.R",
+    "project_path" : "MixedEffects_PowerCalculation.R",
+    "properties" : {
+        "cursorPosition" : "65,23",
+        "scrollLine" : "52",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

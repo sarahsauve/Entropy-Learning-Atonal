@@ -29,7 +29,7 @@ data$Type <- as.factor(data$Type)
 #Evaluation includes coefficients, their 95% confidence intervals and the variance explained (R2) of the model
 #(variance.explained is a function written by me)
 prediction.data <- filter(data, RatingType == "Prediction")
-prediction.model <- lmer(Rating ~ Time * Type + (1+MelodyID|Participant), data = prediction.data)
+prediction.model <- lmer(Rating ~ Time * Type + (1|MelodyID) + (1+MelodyID|Participant), data = prediction.data)
 summary(prediction.model)
 variance.explained(prediction.model, data$prediction) #R2
 confint(prediction.model, method = "Wald")
@@ -37,7 +37,7 @@ confint(prediction.model, method = "Wald")
 precision.data <- filter(data, RatingType == "Precision")
 ##Subtract ratings from 8 to match scales
 precision.data$Rating <- 8-precision.data$Rating
-precision.model <- lmer(Rating ~ Time * Type + (1+MelodyID|Participant), data = precision.data)
+precision.model <- lmer(Rating ~ Time * Type + (1|MelodyID) + (1+MelodyID|Participant), data = precision.data)
 summary(precision.model)
 variance.explained(precision.model, data$precision)
 confint(precision.model, method = "Wald")

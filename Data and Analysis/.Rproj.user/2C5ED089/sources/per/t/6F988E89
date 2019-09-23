@@ -9,13 +9,16 @@
     "id" : "6F988E89",
     "lastKnownWriteTime" : 1560959507,
     "last_content_update" : 1560959507583,
-    "path" : "D:/Sauve/Entropy-Learning-Atonal/Data and Analysis/Variance function.R",
+    "path" : "D:/Sync/Sauve/MUN Postdoc/Entropy-Learning-Atonal/Data and Analysis/Variance function.R",
     "project_path" : "Variance function.R",
     "properties" : {
         "cursorPosition" : "0,0",
         "scrollLine" : "0",
         "tempName" : "Untitled2"
     },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
     "relative_order" : 7,
     "source_on_save" : false,
     "source_window" : "",
