@@ -64,7 +64,7 @@ abstract: |
 keywords          : "prediction, entropy, IDyOM, serial music, predictive coding"
 wordcount         : "X"
 
-bibliography      : ["r-references.bib"]
+bibliography      : ["zotero_library.bib", "r-references.bib"]
 
 floatsintext      : no
 figurelist        : no
@@ -77,11 +77,21 @@ replace_ampersands: yes
 
 documentclass     : "apa6"
 classoption       : "man"
-output            : papaja::apa6_word
+output            : papaja::apa6_docx
 ---
 
 ```{r setup, include = FALSE}
 library("papaja")
+library("citr")
+library("tidyverse")
+
+r_refs(file = "r-references.bib")
+r_citations <- cite_r(file = "r-references.bib")
+
+##Data import
+
+
+
 ```
 
 ```{r analysis-preferences}
@@ -90,17 +100,17 @@ set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
 
-Predictive coding is a compelling theory of brain function that has gained much interest in recent years (Clark, 2013b, 2013a; Friston & Kiebel, 2011). According to this framework, our brains deal in prediction and prediction error. Models of the world generate predictions and incoming sensory information generate prediction errors; our brain then works to explain away these errors by updating its models to make better predictions. These predictions are further modulated by uncertainty; given a context, a prediction may be a total guess or it may be the only perceived option. Given its highly structured nature, music provides an interesting context in which to investigate the predictive coding theory. The predictive coding framework has been applied to some aspects of music perception (Koelsch, Vuust, & Friston, 2018; Rohrmeier & Koelsch, 2012) including the perception of groove (Vuust, Ostergaard, Pallesen, Bailey, & Roepstorff, 2009; Vuust & Witek, 2014) and auditory scene analysis (Bendixen, 2014).
+Predictive coding is a compelling theory of brain function that has gained much interest in recent years [@clarkManyFacesPrecision2013; @clarkWhateverNextPredictive2013; @fristonPredictiveCodingFreeenergy2011]. According to this framework, our brains deal in prediction and prediction error. Models of the world generate predictions and incoming sensory information generate prediction errors; our brain then works to explain away these errors by updating its models to make better predictions. These predictions are further modulated by uncertainty; given a context, a prediction may be a total guess or it may be the only perceived option. Given its highly structured nature, music provides an interesting context in which to investigate the predictive coding theory. The predictive coding framework has been applied to some aspects of music perception [@koelschPredictiveProcessesPeculiar2018; @rohrmeierPredictiveInformationProcessing2012] including the perception of groove [@vuustPredictiveCodingMusic2009; @vuustRhythmicComplexityPredictive2014] and auditory scene analysis [@bendixenPredictabilityEffectsAuditory2014].
 
-Beyond these specific applications, the concept of predictability and expectation is not new to music science (Meyer, 1956). It has been applied to a variety of music perception topics including melody perception (Margulis, 2005; Narmour, 1990, 1992; Pearce & Wiggins, 2006; Schellenberg, 1997; Temperley, 2008), phrase segmentation (Pearce, Müllensiefen, & Wiggins, 2010), musical emotion (Egermann, Pearce, Wiggins, & McAdams, 2013; Sauvé, Sayed, Dean, & Pearce, 2018), perceived complexity (Eerola, 2016; Sauvé & Pearce, in press) and auditory scene analysis (French-St. George & Bregman, 1989; Schröger et al., 2014). One promising computational model of musical expectations is IDyOM, or information dynamics of music (Pearce, 2005, 2018). IDyOM is a variable-order Markov model (Begleiter, El-Yaniv, & Yona, 2004; Bunton, 1997) which uses a multiple-viewpoint framework (Conklin & Witten, 1995), allowing it to combine models of different representations of the musical surface.  IDyOM uses statistical learning to build models of the structural regularities in music and then uses these models to generate probabilistic predictions for a musical event based on the preceding context. Given a context, IDyOM estimates the probability of different continuations of the context based on how often they have appeared in similar contexts in its previous experience of music. IDyOM’s predictions combine probabilities derived from a long-term model trained on a large corpus, reflecting schematic learning of structure through long-term exposure to a musical style, and a short-term model, trained incrementally on the current piece of music, reflecting learning of local learning of motivic structure internal to a piece of music. IDyOM can generate probabilistic predictions for the pitch and timing of a musical note in a melodic context and the next chord in a harmonic sequence. IDyOM can also generate the entropy associated with these predictions. Entropy measures the uncertainty of each prediction, where maximum entropy occurs when all possible events are equiprobable.
+Beyond these specific applications, the concept of predictability and expectation is not new to music science [@meyerEmotionMeaningMusic1956]. It has been applied to a variety of music perception topics including melody perception [@margulisModelMelodicExpectation2005; @narmourAnalysisCognitionBasic1990; @narmourAnalysisCognitionMelodic1992; @pearceExpectationMelodyInfluence2006; @schellenbergSimplifyingImplicationRealizationModel1997; @temperleyProbabilisticModelMelody2008], phrase segmentation [@pearceRoleExpectationProbabilistic2010], musical emotion [@egermannProbabilisticModelsExpectation2013; @sauveEffectsPitchTiming2018], perceived complexity [@eerolaExpectancyViolationInformationTheoreticModels2016; @sauveInformationtheoreticModellingPerceivedinpress] and auditory scene analysis [@french-st.georgeRolePredictabilitySequence1989; @schrogerPredictiveRegularityRepresentations2014]. One promising computational model of musical expectations is IDyOM, or information dynamics of music [@pearceConstructionEvaluationStatistical2005; @pearceStatisticalLearningProbabilistic2018]. IDyOM is a variable-order Markov model [@begleiterPredictionUsingVariable2004; @buntonSemanticallyMotivatedImprovements1997] which uses a multiple-viewpoint framework [@conklinMultipleViewpointSystems1995], allowing it to combine models of different representations of the musical surface.  IDyOM uses statistical learning to build models of the structural regularities in music and then uses these models to generate probabilistic predictions for a musical event based on the preceding context. Given a context, IDyOM estimates the probability of different continuations of the context based on how often they have appeared in similar contexts in its previous experience of music. IDyOM’s predictions combine probabilities derived from a long-term model trained on a large corpus, reflecting schematic learning of structure through long-term exposure to a musical style, and a short-term model, trained incrementally on the current piece of music, reflecting learning of local learning of motivic structure internal to a piece of music. IDyOM can generate probabilistic predictions for the pitch and timing of a musical note in a melodic context and the next chord in a harmonic sequence. IDyOM can also generate the entropy associated with these predictions. Entropy measures the uncertainty of each prediction, where maximum entropy occurs when all possible events are equiprobable.
 
-IDyOM has been shown to accurately predict Western listeners’ pitch expectations in behavioural, physiological and EEG studies (e.g., Egermann et al., 2013; Hansen & Pearce, 2014; Omigie, Pearce, & Stewart, 2012; Omigie, Pearce, Williamson, & Stewart, 2013; Pearce, 2005; Pearce, Ruiz, Kapasi, Wiggins, & Bhattacharya, 2010; Quiroga-Martinez et al., 2019). In many circumstances, IDyOM provides a more accurate model of listeners’ pitch expectations than static rule-based models (e.g., Narmour, 1990; Schellenberg, 1997).
+IDyOM has been shown to accurately predict Western listeners’ pitch expectations in behavioural, physiological and EEG studies [@egermannProbabilisticModelsExpectation2013; @hansenPredictiveUncertaintyAuditory2014; @omigieElectrophysiologicalCorrelatesMelodic2013; @omigieTrackingPitchProbabilities2012; @pearceConstructionEvaluationStatistical2005; @pearceUnsupervisedStatisticalLearning2010; @quiroga-martinezReducedPredictionError2019]. In many circumstances, IDyOM provides a more accurate model of listeners’ pitch expectations than static rule-based models [e.g., @narmourAnalysisCognitionBasic1990; @schellenbergSimplifyingImplicationRealizationModel1997].
 
 ## Tonality and Atonality
 
-The vast majority of Western classical music is tonal. Tonal music is based on the concept of key, where the tonic, or first note, of that key is the most important note. The other pitches of the key have a very specific pattern of importance which forms the tonal hierarchy (Krumhansl & Shepard, 1979). Atonal music is a rejection of this tonal hierarchy, a movement beginning in the 19th century. Serial music is a specific style of post-tonal music invented by Arnold Schoenberg (Schoenberg, 1975) whose basic unit is the tone row and whose goal is to avoid tonal centers. The tone row consists of all twelve notes of the chromatic scale. This row can be transformed in several ways: it can be reversed, inverted or reversed and inverted. The row and its transformations make up the basic melodic and harmonic material of the music.
+The vast majority of Western classical music is tonal. Tonal music is based on the concept of key, where the tonic, or first note, of that key is the most important note. The other pitches of the key have a very specific pattern of importance which forms the tonal hierarchy [@krumhanslQuantificationHierarchyTonal1979]. Atonal music is a rejection of this tonal hierarchy, a movement beginning in the 19th century. Serial music is a specific style of post-tonal music invented by Arnold Schoenberg [@schoenbergCompositionTwelveTones1975] whose basic unit is the tone row and whose goal is to avoid tonal centers. The tone row consists of all twelve notes of the chromatic scale. This row can be transformed in several ways: it can be reversed, inverted or reversed and inverted. The row and its transformations make up the basic melodic and harmonic material of the music.
 
-Research on the perception of atonal music is also a minority (Ball, 2011; Imberty, 1993). Without tonal structure to guide listeners, alternative sources of structure have been explored (Dibben, 1994, 1999; Lerdahl, 1989) as well as the lingering role of the tonal hierarchy (Krumhansl, Sandell, & Sergeant, 1987). Krumhansl et al. (1987) applied the probe tone method (Krumhansl & Shepard, 1979) to tone rows from Schoenberg’s Wind Quintet and String Quartet No. 4. Large individual differences were observed; however, two general patterns could be observed. First, listeners with little to no knowledge of serial music presented traces of the tonal hierarchy pattern in their responses. In contrast, listeners with knowledge serial music presented a pattern of expectations that explicitly avoided a tonal center. In other words, they had a model of expectations specific to serial music. This type of stylistic compartmentalization has also been observed between classical and jazz musicians (Hansen, Vuust, & Pearce, 2016).
+Research on the perception of atonal music is also a minority [@ballSchoenbergSerialismCognition2011; @imbertyHowWePerceive1993]. Without tonal structure to guide listeners, alternative sources of structure have been explored [@dibbenCognitiveRealityHierarchic1994; @dibbenPerceptionStructuralStability1999; @lerdahlAtonalProlongationalStructure1989] as well as the lingering role of the tonal hierarchy [@krumhanslPerceptionToneHierarchies1987]. Krumhansl et al. (1987) applied the probe tone method [@krumhanslQuantificationHierarchyTonal1979] to tone rows from Schoenberg’s Wind Quintet and String Quartet No. 4. Large individual differences were observed; however, two general patterns could be observed. First, listeners with little to no knowledge of serial music presented traces of the tonal hierarchy pattern in their responses. In contrast, listeners with knowledge serial music presented a pattern of expectations that explicitly avoided a tonal center. In other words, they had a model of expectations specific to serial music. This type of stylistic compartmentalization has also been observed between classical and jazz musicians [@hansenIfYouHave2016].
 
 ## Learning Atonality
 
@@ -114,46 +124,72 @@ IDyOM will perform a similar experiment, generating information content (inverse
 
 # Methods
 
+```{r demographic-info}
+#Number of participants
+nsubj <- length(unique(data$Participant))
+```
+
 ## Participants
 
-34 third year students of Memorial University of Newfoundland’s School of Music and enrolled in the Materials and Techniques of Post-Tonal Music course participated in this study and provided written informed consent in accordance with the Interdisciplinary Committee on Ethics in Human Research at Memorial University of Newfoundland. Their mean age is XX (SD = XX), mean musical sophistication according to Goldsmith’s Musical Sophistication Index’s musical training subscale is XX (SD = XX) and exposure to atonal music according to our own devised scale (out of 35) is XX (SD = XX). All participants received a small cash honorarium for their participation.
+`r printnum(nsubj)` third year students of Memorial University of Newfoundland’s School of Music and enrolled in the Materials and Techniques of Post-Tonal Music course participated in this study and provided written informed consent in accordance with the Interdisciplinary Committee on Ethics in Human Research at Memorial University of Newfoundland. Their mean age is `r mean(data$Age)`, (SD = `r sd(data$age)`), mean musical sophistication according to Goldsmith’s Musical Sophistication Index’s musical training subscale is `r mean(data$GoldMSI)`, (SD = `r sd(data$GoldMSI)`) and exposure to atonal music according to our own devised scale (out of 35) is `r mean(data$Exposure)`, (SD = `r sd(data$Exposure)`). All participants received a small cash honorarium for their participation.
 
 ## Stimuli
 
-Sixteen serial music phrases were selected for this study, eight for the Before portion and eight for the After portion. Table 1 presents the details of these excerpts; MIDI files can be found on the project’s OSF page . Each phrase contains part or all of a tone row and is a fully formed musical phrase. Phrases were divided into Before or After to achieve an equal number of note events in each phase; both contain 105 note events. Phrases included in the After portion were not covered in class, while phrases included in the Before portion could be.
+Sixteen serial music phrases were selected for this study, eight for the Before portion and eight for the After portion. Table\ \@ref(tab:stimuli-table-insert) presents the details of these excerpts; MIDI files can be found on the project’s OSF page . Each phrase contains part or all of a tone row and is a fully formed musical phrase. Phrases were divided into Before or After to achieve an equal number of note events in each phase; both contain 105 note events. Phrases included in the After portion were not covered in class, while phrases included in the Before portion could be.
 
-------------------------------------------------------------------------------------------------
-Composer	          Title of work	                    Measures     Instrument 	Length      Time
-------------------  -------------------------------  -----------  -----------  ---------  ----------
-Luigi Dallapiccola	"Quartina," No. 11 from Quaderno  1-5	         Piano	       14	        Before
-                    musicale di Annalibera	
-		6-9	Piano	13	After
-Arnold Schoenberg	Variations for Orchestra, Op. 31
-	51-57	1st violins	13	After
-		34-38	Cellos	13	Before
-		46-50	Cellos	13	After
-		39-45	Cellos	14	Before
-Anton Webern	"Wie bin ich froh," No. 1 from Drei Lieder, Op. 25	3-5	Voice	16	After
-		6-8	Voice	12	Before
-	"Des Herzens Purpurvogel fliegt durch Nacht," No. 2 from Drei Lieder, Op. 25	3-8	Voice	11	Before
-		10-15	Voice	11	After
-	"Sterne, Ihr silbernen Bienen der Nacht," No. 3 from Drei Lieder, Op. 25	29-36	Voice	15	After
-		37-45	Voice	16	Before
-	String Quartet, Op. 28, Mvmt. 2	1-7	1st violin	12	After
-		8-14	1st violin	12	Before
-		2-10	2nd violin	13	Before
-		11-18	2nd violin	12	After
+```{r stimuli-table-insert, results = 'asis'}
+
+#Import phrase details
+library(readxl)
+phrase_details <- read_excel("Stimuli/Phrase_Details.xlsx")
+phrase_details_test <- select(phrase_details, Composer, Title, Measures, Instrument, Length, Time)
+
+apa_table(
+  phrase_details
+  , caption = "Stummary of stimuli"
+  , note = "Length is given in number of notes"
+)
+
+```
+
+------------------------------------------------------------------------------------------------------
+  Composer	          Title of work	                     Measures     Instrument 	  Length      Time
+------------------  ----------------------------------  -----------  ------------  ---------  --------
+Luigi Dallapiccola	 "Quartina," No. 11 from Quaderno     1-5	          Piano	       14	       Before
+                     musicale di Annalibera	              6-9         	Piano	       13	       After
+------------------  ----------------------------------  -----------  ------------  ---------  --------
+Arnold Schoenberg	   Variations for Orchestra, Op. 31    51-57	     1st violins	  13	       After
+                                                    		 34-38	     Cellos         13	       Before
+		                                                     46-50	     Cellos	        13      	 After
+		                                                     39-45	     Cellos      	  14	       Before
+------------------  ----------------------------------  -----------  ------------  ---------  --------
+Anton Webern         "Wie bin ich froh," No. 1 from      3-5	        Voice	        16	       After
+                      Drei Lieder, Op. 25                6-8	        Voice	        12	       Before
+------------------  ----------------------------------  -----------  ------------  ---------  --------
+Anton Webern         "Des Herzens Purpurvogel fliegt     3-8	        Voice	        11	       Before
+                     durch Nacht," No. 2 from Drei       10-15	      Voice	        11	       After
+                     Lieder, Op. 25
+------------------  ----------------------------------  -----------  ------------  ---------  --------
+Anton Webern         "Sterne, Ihr silbernen Bienen       29-36	      Voice	        15	       After
+                      derNacht," No. 3 from Drei         37-45	      Voice	        16	       Before
+                      Lieder, Op. 25
+------------------  ----------------------------------  -----------  ------------  ---------  --------
+Anton Webern         String Quartet, Op. 28, Mvmt. 2	    1-7	        1st violin 	  12	       After
+                                                          8-14	      1st violin	  12	       Before
+		                                                      2-10	      2nd violin	  13	       Before
+		                                                      11-18	      2nd violin	  12	       After
+------------------------------------------------------------------------------------------------------
 	
-Table: Summary of stimuli
-
-<!-- Notes. Length is given in number of note events. #how do I add this properly? -->
+Table: Summary of stimuli. Length is given in number of note events.
 
 
 ## Procedure
 
-After providing informed consent, participants were asked to fill out the Gold-MSI musical training sub-scale and exposure to atonal music questionnaires; both can be found on the project’s OSF page. They were then moved to a double-walled, electrically shielded sound-attenuating booth for the auditory task, presented through XXX headphones using e-Prime 3; standalone implementation application available on the project’s OSF page. Figure 1 illustrates the procedure of a single trial: each phrase was presented in fragments, with each subsequent fragment containing one more pitch than the last. After each fragment, the participant answered the corresponding question with a rating on a scale of 1 to 7. Fragments were presented at a rate of 100bpm and at a comfortable volume. The trial was complete once the entire phrase had been presented and each pitch rated. For half the phrases, participants rated their predictions and sense of closure, answering the following two questions: “How surprising was the last note?” and “How well did the last note finish the phrase?”. For the other half of the phrases, participants rated their precision, or sense of certainty by answering the following question: “How certain of you of what note will come next?”. Two practice trials were presented, one for each type of question, followed by the eight phrases appropriate to the phase (Before/After); phrases were presented in random order. Participants were notified of which type of questions they would be answering for a particular trial before the trial began. The type of questions collected for each phrase was counterbalanced across participants.
- 
-Figure 1. Trial procedure: the phrase is presented in fragments, each with one pitch more than the last; after each fragment, the participant will answer the appropriate question with a rating from 1 to 7.
+After providing informed consent, participants were asked to fill out the Gold-MSI musical training sub-scale and exposure to atonal music questionnaires; both can be found on the project’s OSF page. They were then moved to a double-walled, electrically shielded sound-attenuating booth for the auditory task, presented through XXX headphones using e-Prime 3; standalone implementation application available on the project’s OSF page. Figure\ \@ref(fig:procedure) illustrates the procedure of a single trial: each phrase was presented in fragments, with each subsequent fragment containing one more pitch than the last. After each fragment, the participant answered the corresponding question with a rating on a scale of 1 to 7. Fragments were presented at a rate of 100bpm and at a comfortable volume. The trial was complete once the entire phrase had been presented and each pitch rated. For half the phrases, participants rated their predictions and sense of closure, answering the following two questions: “How surprising was the last note?” and “How well did the last note finish the phrase?”. For the other half of the phrases, participants rated their precision, or sense of certainty by answering the following question: “How certain of you of what note will come next?”. Two practice trials were presented, one for each type of question, followed by the eight phrases appropriate to the phase (Before/After); phrases were presented in random order. Participants were notified of which type of questions they would be answering for a particular trial before the trial began. The type of questions collected for each phrase was counterbalanced across participants.
+
+```{r procedure, fig.cap = "Trial procedure: the phrase is presented in fragments, each with one pitch more than the last; after each fragment, the participant will answer the appropriate question with a rating from 1 to 7."}
+knitr::include_graphics("/Paper/Figure1.png", dpi = 300)
+```
 
 ## Data analysis
 All analyses are implemented in `r cite_r("r-references.bib")`.
