@@ -1,9 +1,11 @@
 ##Visualize IDyOM data
 
 library(tidyverse)
+library(lme4)
+library(lmerTest)
 
 #Import
-data <- read_csv("D:/Sync/Sauve/MUN Postdoc/Entropy-Learning-Atonal/IDyOM_data.csv")
+data <- read_csv("IDyOM_data.csv")
 
 #Plotting data
 plotting_data <- data %>%
@@ -29,6 +31,7 @@ ggplot(plotting_data, aes(x = melody.id, y = meanEntropy, fill = Time)) +
 #here the pattern is flipped, a model trained on atonal music as much higher entropy - so higher uncertainty.
 #is this related to having less information to go on, or the nature of the music?
 
-anova <- lm(information.content ~ Viewpoint * Time, data = data)
-summary(anova)
-#significant effect of time only
+anova <- lmer(information.content ~ Viewpoint * Time + (1|melody.id), data = data, REML = FALSE)
+summary(anova) #significant intercept only
+anova(anova) #main effect of viewpoint
+confint(anova, method = "Wald") #nothing except intercept

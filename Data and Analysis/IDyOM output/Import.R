@@ -13,7 +13,7 @@ library(tidyverse)
 
 # Before -------------------------------------------------------------
 
-file.names.before <- list.files(path = "IDyOM output/Before/", pattern = ".dat")
+file.names.before <- list.files(path = "IDyOM output/Before2/", pattern = ".dat")
 
 #format into data frame
 format.data.before <- function(file.name.vector, time){
@@ -22,7 +22,7 @@ format.data.before <- function(file.name.vector, time){
     file.name <- file.names.before[i]
     viewpoints <- unlist(str_extract_all(file.name, "cpitch|cpintfref|cpint"))
     viewpoints <- viewpoints[-1]
-    file.path <- paste("IDyOM output/Before/", sep = "", file.name)
+    file.path <- paste("IDyOM output/Before2/", sep = "", file.name)
     file <- read_table2(file.path, col_names = TRUE)
     file <- file[,c(2:4, 16, 73:74)] #select melody.id, note.id, melody.name, cpitch, information.content, entropy
     file$Viewpoint <- str_c(viewpoints, collapse = "-")
@@ -37,14 +37,14 @@ before_data <- format.data.before(file.names.before, "Before")
 
 # After -------------------------------------------------------------------
 
-file.names.after <- list.files(path = "IDyOM output/After/", pattern = ".dat")
+file.names.after <- list.files(path = "IDyOM output/After2/", pattern = ".dat")
 format.data.after <- function(file.name.vector, time){
   data <- vector("list", length(file.names.after))
   for(i in seq_along(file.names.after)){
     file.name <- file.names.after[i]
     viewpoints <- unlist(str_extract_all(file.name, "cpitch|cpintfref|cpint"))
     viewpoints <- viewpoints[-1]
-    file.path <- paste("IDyOM output/After/", sep = "", file.name)
+    file.path <- paste("IDyOM output/After2/", sep = "", file.name)
     file <- read_table2(file.path, col_names = TRUE)
     file <- file[,c(2:4, 16, 78:79)] #select melody.id, note.id, melody.name, cpitch, information.content, entropy
     file$Viewpoint <- str_c(viewpoints, collapse = "-")
@@ -57,4 +57,4 @@ format.data.after <- function(file.name.vector, time){
 after_data <- format.data.after(file.names.after, "After")
 
 data <- rbind(before_data, after_data)
-write.csv(data, file = "IDyOM_data.csv")
+write_csv(data, path = "IDyOM_data.csv")
